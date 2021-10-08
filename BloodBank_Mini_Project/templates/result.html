@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+  </script>
+</head>
+<body>
+<div class="container">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-sm bg-light">
+      <ul class="navbar-nav"> 
+       {% if user.is_authenticated %} 
+         <li class="nav-item">
+          <a class="nav-link text-success" >Hai {{user.username}}</a>
+          <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+        </li>
+          <div class="col-md-auto">
+            <h4 class="heading">BE BRAVE AND DONATE BLOOD...</h4>
+          </div>
+      </ul> 
+       {% endif %}
+    </nav> 
+  </div>  
+  <table class="table" id="example">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Age</th>
+        <th scope="col">Blood Group</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+    {% for i in datas %}
+      <tr>
+        <th scope="row">{{i.name}}</th>
+        <td>{{i.phone}}</td>
+        <td>{{i.age}}</td>
+        <td>{{i.blood_grp}}</td>
+      </tr>
+    {% endfor %}  
+    </tbody> 
+  </table>
+  <a href="{% url 'BloodBank_app:index' %}" class="btn btn-success">Donate</a>
+</div>  
+
+</body>
+</html>  

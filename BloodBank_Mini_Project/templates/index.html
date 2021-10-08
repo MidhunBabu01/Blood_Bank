@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+   <div class="container-fluid">  
+  </div>
+    <div>
+    {% if user.is_authenticated %} <h6>Hello {{user.username}}</h6><a href="{% url 'accounts:logout' %}">Logout</a>{% else %}<a href="{% url 'accounts:register' %}">Register</a> | <a href="{% url 'accounts:login' %}">Login</a>{% endif %}
+      <h1> Welcome to Blood donation camp</h1>
+    </div> 
+
+   <div >
+      <h5> Donar Info..</h5>
+      
+    </div>
+    <!-- Login Form -->
+  <div>
+    <form  action="result" method="post">
+    {% csrf_token %}
+      <input type="text"   name="name" placeholder="Full Name">
+      <input type="number"  name="number" placeholder="Mobile">
+      <input type="number"  name="age" placeholder="Age">
+      <input type="text"   name="group" placeholder="Blood Group">
+      <input type="submit" class="fadeIn fourth" value="Add">
+    </form> 
+    <!-- Remind Passowrd -->
+</div>
+</div>  
+
+{% endblock %} 
+
+
+
+
+
+ {% comment %} <nav class="navbar navbar-expand-sm bg-light">
+      <ul class="navbar-nav"> 
+       {% if user.is_authenticated %} 
+         <li class="nav-item">
+          <a class="nav-link text-success" >Hai {{user.username}}</a>
+          <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+        </li>
+       
+          <div class="col-md-auto">
+            <h4>Variable width content</h4>
+          </div>
+        
+      </ul> 
+       {% endif %}
+  </nav>  {% endcomment %}

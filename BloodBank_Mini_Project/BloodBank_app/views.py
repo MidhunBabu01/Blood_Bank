@@ -19,11 +19,6 @@ def result(request):
             datas.save()
         result = DonarDetails.objects.all()
         return render(request,"result.html",{'datas':result})
-            # datas ={
-            #     'name':name,
-            #     'phone':phone,
-            #     'age':age,
-            #     'blood_grp':blood_grp,
-            #     }
-            # context.append(datas)
+    else:
+        return redirect('accounts:login')
     

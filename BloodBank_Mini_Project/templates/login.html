@@ -41,7 +41,7 @@
 							</div>
 						</div>
 							<div class="d-flex justify-content-center mt-3 login_container">
-					<button  type="submit"  id="btn1" class="btn login_btn">Login</button>
+					<button  type="button"  id="btn1" class="btn login_btn">Login</button>
 				   </div>
 					</form>
 				</div>
@@ -56,24 +56,25 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
-		function show(){
+		$("#btn1").click(function(e){
+			e.preventDefault();
 			var username = $('#username').val()
 			var password = $('#password').val()
 			console.log('hai')
+			console.log(username)
 			var data ={
 				'csrfmiddlewaretoken':'{{csrf_token}}',
 				'username':username,
 				'password':password
 				
 			}
-			if(username==''){
+			if(username == ''){
 				alert('Enter valid username')
-			}else if(password==''){
+			}else if(password == ''){
 				alert('Enter valid Password')
 			}else
 			{
 			$.ajax({
-				console.log('hi')
 				url:'',
 				method:"POST",
 				data :data,
@@ -81,14 +82,15 @@
 				success:function(data){
 					if(data.success){
 						alert('User Logged in')
-						window.location.replace('/index/')
+						window.location.replace('result')
 					}else{
 						alert('User is not authenticated')
 					}
 				}
 			})
 		}
-	}
+
+		})
 	</script>
 
 </body>

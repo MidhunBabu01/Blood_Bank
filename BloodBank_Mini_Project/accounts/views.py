@@ -40,11 +40,21 @@ def user_login(request):
         if user is not None:
             request.session['username']=username
             auth.login(request,user)
-            return redirect('BloodBank_app:result')
+            return JsonResponse(
+                {'success':True},
+                safe=False
+            )
         else:
             auth.login
-            messages.info(request,"Invalid Details!!!")
-            return redirect('accounts:login')
+            return JsonResponse(
+                {'success':False},
+                safe=False
+            )
+        #     return redirect('BloodBank_app:result')
+        # else:
+        #     auth.login
+        #     messages.info(request,"Invalid Details!!!")
+        #     return redirect('accounts:login')
     else:
         return render(request,"login.html")
 

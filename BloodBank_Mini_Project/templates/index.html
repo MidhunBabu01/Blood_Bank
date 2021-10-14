@@ -7,13 +7,13 @@
     <!-- Icon -->
    <div class="container-fluid">  
   </div>
-    <div>
+    {% comment %} <div>
     {% if user.is_authenticated %} <h6>Hello {{user.username}}</h6><a href="{% url 'accounts:logout' %}">Logout</a>{% else %}<a href="{% url 'accounts:register' %}">Register</a> | <a href="{% url 'accounts:login' %}">Login</a>{% endif %}
       <h1> Welcome to Blood donation camp</h1>
-    </div> 
+    </div>  {% endcomment %}
 
    <div >
-      <h5> Donar Info..</h5>
+      <h3> Donar Info..</h3>
       
     </div>
     <!-- Login Form -->

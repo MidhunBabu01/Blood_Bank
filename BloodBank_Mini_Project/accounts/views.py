@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User,auth
 from django.http.response import JsonResponse
+
 # Create your views here.
 def register(request):
     if request.method == "POST":
@@ -29,32 +30,29 @@ def register(request):
     else:   
         return render(request,"register.html")
 
-
-
-
-def login(request):
-    if request.method== 'POST':
+def user_login(request):
+    if 'username' in request.session:
+        return redirect("BloodBank_app:result")
+    elif request.method== 'POST':
         username= request.POST['username']
-        password= request.POST['password']
+        password = request.POST['password']
         user = auth.authenticate(username=username,password=password)
         if user is not None:
+            request.session['username']=username
             auth.login(request,user)
-            return JsonResponse(
-                {'success':True},
-                safe=False
-
-            )
+            return redirect('BloodBank_app:result')
         else:
+            auth.login
             messages.info(request,"Invalid Details!!!")
-            return JsonResponse(
-                {'success':False},
-                safe=False
-            )
+            return redirect('accounts:login')
     else:
         return render(request,"login.html")
 
 
 
+
+
 def logout(request):
-    auth.logout(request)
-    return redirect('/')
+    if 'username' in request.session:
+        request.session.flush()
+    return redirect('accounts:login')    

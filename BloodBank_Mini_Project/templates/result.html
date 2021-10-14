@@ -15,20 +15,22 @@
 <body>
 <div class="container">
   <div class="container-fluid">
+  {% comment %} {% if user.is_authenticated %} {% endcomment %}
     <nav class="navbar navbar-expand-sm bg-light">
       <ul class="navbar-nav"> 
-       {% if user.is_authenticated %} 
          <li class="nav-item">
           <a class="nav-link text-success" >Hai {{user.username}}</a>
-          <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+          <a  class="btn btn-danger" href="{% url 'accounts:logout' %}">Logout</a>
+          {% comment %} <button  type="submit" href="" class="btn btn-danger">Logout</button> {% endcomment %}
         </li>
           <div class="col-md-auto">
             <h4 class="heading">BE BRAVE AND DONATE BLOOD...</h4>
           </div>
+        
       </ul> 
-       {% endif %}
-    </nav> 
-  </div>  
+    </nav>
+  {% comment %} {% endif %} {% endcomment %}
+  </div>     
   <table class="table" id="example">
     <thead class="thead-dark">
       <tr>
@@ -45,7 +47,7 @@
         <th scope="row">{{i.name}}</th>
         <td>{{i.phone}}</td>
         <td>{{i.age}}</td>
-        <td>{{i.blood_grp}}</td>
+        <td>{{i.blood}}</td>
       </tr>
     {% endfor %}  
     </tbody> 
